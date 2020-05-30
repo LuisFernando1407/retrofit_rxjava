@@ -16,9 +16,13 @@ public class NoResultAdapter extends RecyclerView.Adapter<NoResultAdapter.NoResu
     private Context context;
     private String title;
 
-    public NoResultAdapter(Context context, String title){
+    private NoResultAdapter(Context context, String title){
         this.context = context;
         this.title = title;
+    }
+
+    public static NoResultAdapter of(Context context, String title){
+        return new NoResultAdapter(context, title);
     }
 
     @NonNull

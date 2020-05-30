@@ -6,6 +6,6 @@ import com.br.retrofit_rxjava.ui.activity.FlowNavigator;
 public interface MainNavigator extends FlowNavigator {
     void beforeRequest();
     void afterRequest();
-    void showCoins(Crypto crypto);
+    void showCoins();
     void showErrorOrEmptyList();
 }

@@ -1,7 +1,7 @@
 package com.br.retrofit_rxjava.data.api.auth;
 
 import com.br.retrofit_rxjava.data.api.constants.APIConstants;
-import com.br.retrofit_rxjava.util.Util;
+import com.br.retrofit_rxjava.util.CommonUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,9 +20,9 @@ public class Authenticated {
 
         Request newRequest = chain.request();
 
-        if(Util.getApiToken() != null){
+        if(CommonUtils.getApiToken() != null){
             newRequest = chain.request().newBuilder()
-                    .addHeader("Authorization", "Bearer " + Util.getApiToken())
+                    .addHeader("Authorization", "Bearer " + CommonUtils.getApiToken())
                     .build();
         }
 

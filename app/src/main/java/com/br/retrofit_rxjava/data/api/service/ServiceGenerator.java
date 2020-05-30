@@ -4,8 +4,13 @@ import com.br.retrofit_rxjava.data.api.auth.Authenticated;
 
 public class ServiceGenerator extends Authenticated {
 
-    public ServiceGenerator(){
+    private ServiceGenerator(){
         this.setupRetrofit();
+    }
+
+    /* Method factory */
+    public static ServiceGenerator of(){
+        return new ServiceGenerator();
     }
 
     public <S> S createService(Class<S> service){

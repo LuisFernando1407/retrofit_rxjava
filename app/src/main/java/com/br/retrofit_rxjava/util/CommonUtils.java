@@ -16,7 +16,7 @@ import com.br.retrofit_rxjava.RetrofitRxJavaApplication;
 
 import java.util.Objects;
 
-public class Util {
+public class CommonUtils {
 
     private static SharedPreferences getSessionPreferences() {
         Context ctx = RetrofitRxJavaApplication.getInstance();

@@ -11,7 +11,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainRepository {
     public Disposable getCoins(String type, Callback<Crypto, Throwable> callback) {
-        return new ServiceGenerator().createService(CoinEndpoints.class).getCoinData(type)
+        return ServiceGenerator.of().createService(CoinEndpoints.class).getCoinData(type)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(callback::onError)

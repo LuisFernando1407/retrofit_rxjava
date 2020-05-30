@@ -24,10 +24,15 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> im
     private List<Market> markets;
     private List<Market> marketsFiltered;
 
-    public MainAdapter(Context context, List<Market> markets){
+    private MainAdapter(Context context, List<Market> markets){
         this.context = context;
         this.markets = markets;
         this.marketsFiltered = markets;
+    }
+
+    /* Method factory */
+    public static MainAdapter of(Context context, List<Market> markets){
+        return new MainAdapter(context, markets);
     }
 
     @NonNull
@@ -86,6 +91,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> im
                 return filterResults;
             }
 
+            @SuppressLint("UNCHECKED_CAST")
             @Override
             protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
                 marketsFiltered = (ArrayList<Market>) filterResults.values;
