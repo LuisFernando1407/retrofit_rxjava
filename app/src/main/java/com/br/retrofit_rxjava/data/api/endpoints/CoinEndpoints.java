@@ -1,6 +1,6 @@
-package com.br.retrofit_rxjava.api.endpoints;
+package com.br.retrofit_rxjava.data.api.endpoints;
 
-import com.br.retrofit_rxjava.model.Crypto;
+import com.br.retrofit_rxjava.data.model.Crypto;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;

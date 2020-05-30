@@ -1,6 +1,6 @@
-package com.br.retrofit_rxjava.api.service;
+package com.br.retrofit_rxjava.data.api.service;
 
-import com.br.retrofit_rxjava.api.auth.Authenticated;
+import com.br.retrofit_rxjava.data.api.auth.Authenticated;
 
 public class ServiceGenerator extends Authenticated {
 
@@ -8,7 +8,7 @@ public class ServiceGenerator extends Authenticated {
         this.setupRetrofit();
     }
 
-    public static <S> S createService(Class<S> service){
+    public <S> S createService(Class<S> service){
         return retrofit.create(service);
     }
 }

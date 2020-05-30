@@ -1,4 +1,4 @@
-package com.br.retrofit_rxjava.api.callback;
+package com.br.retrofit_rxjava.data.api.callback;
 
 public interface CallbackListener<R, T> {
     void onSuccess(R response);

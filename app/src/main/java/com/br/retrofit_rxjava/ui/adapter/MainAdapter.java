@@ -14,7 +14,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.br.retrofit_rxjava.R;
-import com.br.retrofit_rxjava.model.Market;
+import com.br.retrofit_rxjava.data.model.Market;
 
 import java.util.ArrayList;
 import java.util.List;

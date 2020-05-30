@@ -1,6 +1,6 @@
-package com.br.retrofit_rxjava.api.auth;
+package com.br.retrofit_rxjava.data.api.auth;
 
-import com.br.retrofit_rxjava.api.constants.APIConstants;
+import com.br.retrofit_rxjava.data.api.constants.APIConstants;
 import com.br.retrofit_rxjava.util.Util;
 
 import java.util.concurrent.TimeUnit;
@@ -12,7 +12,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Authenticated {
-    protected static Retrofit retrofit;
+    protected Retrofit retrofit;
 
     private static final int CONNECTION_TIMEOUT = 20*1000;
 

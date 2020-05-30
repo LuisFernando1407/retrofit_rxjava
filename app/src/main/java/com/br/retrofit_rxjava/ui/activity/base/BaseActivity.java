@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity<V extends BaseViewModel<?>> extends AppCompatActivity implements FlowNavigator {
 
     private Dialog dialog;
-    private V viewModel;
+    public V viewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

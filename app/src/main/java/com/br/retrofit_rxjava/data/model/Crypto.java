@@ -1,4 +1,4 @@
-package com.br.retrofit_rxjava.model;
+package com.br.retrofit_rxjava.data.model;
 
 public class Crypto {
     public Ticker ticker;

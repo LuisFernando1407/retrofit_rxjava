@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.br.retrofit_rxjava.R;
-import com.br.retrofit_rxjava.model.Crypto;
+import com.br.retrofit_rxjava.data.model.Crypto;
 import com.br.retrofit_rxjava.ui.activity.base.BaseActivity;
 import com.br.retrofit_rxjava.ui.adapter.MainAdapter;
 import com.br.retrofit_rxjava.ui.adapter.NoResultAdapter;
@@ -42,6 +42,9 @@ public class MainActivity extends BaseActivity<MainViewModel> implements MainNav
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.viewModel.setNavigator(this);
+
         listeners();
     }
 
@@ -51,9 +54,9 @@ public class MainActivity extends BaseActivity<MainViewModel> implements MainNav
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        this.viewModel().requestCrypto("btc");
+    protected void onResume() {
+        super.onResume();
+        this.viewModel.requestCrypto("btc");
     }
 
     @SuppressLint("ClickableViewAccessibility")
