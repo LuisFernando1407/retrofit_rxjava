@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">Retrofit RXJava</string>
+    <string name="app_name">BTC Market</string>
     <string name="txt_search_main">Search by name or price</string>
+    <string name="text_bitcoins">Bitcoin Market</string>
 </resources>

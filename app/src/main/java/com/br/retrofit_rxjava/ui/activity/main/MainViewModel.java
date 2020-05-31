@@ -7,8 +7,8 @@ import android.os.Message;
 import com.br.retrofit_rxjava.RetrofitRxJavaApplication;
 import com.br.retrofit_rxjava.data.api.callback.Callback;
 import com.br.retrofit_rxjava.data.model.Crypto;
-import com.br.retrofit_rxjava.ui.activity.base.BaseViewModel;
-import com.br.retrofit_rxjava.ui.adapter.MainAdapter;
+import com.br.retrofit_rxjava.ui.base.BaseViewModel;
+import com.br.retrofit_rxjava.ui.activity.main.adapter.MainAdapter;
 import com.br.retrofit_rxjava.util.observer.ObserverTextWatcher;
 import com.br.retrofit_rxjava.util.observer.ObserverTextWatcherCallback;
 

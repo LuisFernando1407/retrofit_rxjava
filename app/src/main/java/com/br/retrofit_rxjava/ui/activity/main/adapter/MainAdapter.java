@@ -1,4 +1,4 @@
-package com.br.retrofit_rxjava.ui.adapter;
+package com.br.retrofit_rxjava.ui.activity.main.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -37,27 +37,20 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> im
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MainAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, parent, false);
         return new MainAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Market market = marketsFiltered.get(position);
+    public void onBindViewHolder(@NonNull MainAdapter.ViewHolder holder, int position) {
+        MainAdapterUtil mainAdapterUtil = MainAdapterUtil.of(
+                holder,
+                context,
+                marketsFiltered.get(position)
+        );
 
-        holder.tvMarket.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
-        holder.tvMarket.setOnClickListener(e -> Toast.makeText(context, "Market name", Toast.LENGTH_SHORT).show());
-        holder.tvMarket.setText(market.market.toUpperCase());
-
-        holder.tvVolume.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
-        holder.tvVolume.setOnClickListener(e -> Toast.makeText(context, "Volume of " + market.volume, Toast.LENGTH_SHORT).show());
-        holder.tvVolume.setText(String.valueOf(market.volume));
-
-        holder.tvPrice.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
-        @SuppressLint("DefaultLocale") String priceFormat = "$" + String.format("%.2f", Double.parseDouble(market.price));
-        holder.tvPrice.setText(priceFormat);
-        holder.tvPrice.setOnClickListener(e -> Toast.makeText(context, "Price of " + priceFormat, Toast.LENGTH_SHORT).show());
+        mainAdapterUtil.setDataInView();
     }
 
     @Override
@@ -102,16 +95,22 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> im
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private AppCompatTextView tvVolume;
-        private AppCompatTextView tvMarket;
-        private AppCompatTextView tvPrice;
+        public AppCompatTextView tvVolume;
+        public AppCompatTextView tvMarket;
+        public AppCompatTextView tvPrice;
+
+        public LinearLayout llVolume;
+        public LinearLayout llPrice;
 
         ViewHolder(View view) {
             super(view);
 
-            tvVolume = view.findViewById(R.id.tvVolume);
-            tvMarket = view.findViewById(R.id.tvMarket);
-            tvPrice = view.findViewById(R.id.tvPrice);
+            this.llVolume = view.findViewById(R.id.llVolume);
+            this.llPrice = view.findViewById(R.id.llPrice);
+
+            this.tvVolume = view.findViewById(R.id.tvVolume);
+            this.tvMarket = view.findViewById(R.id.tvMarket);
+            this.tvPrice = view.findViewById(R.id.tvPrice);
         }
     }
 }

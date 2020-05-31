@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.br.retrofit_rxjava.BR;
 import com.br.retrofit_rxjava.R;
 import com.br.retrofit_rxjava.databinding.ActivityMainBinding;
-import com.br.retrofit_rxjava.ui.activity.base.BaseActivity;
+import com.br.retrofit_rxjava.ui.base.BaseActivity;
 import com.br.retrofit_rxjava.ui.adapter.NoResultAdapter;
 import com.br.retrofit_rxjava.util.CommonUtils;
 
@@ -53,6 +53,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     public void afterRequest() {
         this.showLoading(false);
     }
+
+    @Override
+    public void onBackPressed() {}
 
     @Override
     public void showCoins() {

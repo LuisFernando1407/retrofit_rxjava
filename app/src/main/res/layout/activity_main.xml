@@ -14,8 +14,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
+        android:background="@color/colorWhiteSmoke"
         android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginEnd="20dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center"
+                android:text="@string/text_bitcoins"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+        </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
             android:id="@+id/llSearch"
@@ -33,11 +50,13 @@
                 style="@style/Base.TextAppearance.AppCompat.Large"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#F5F5F5"
+                android:background="@drawable/bg_search"
                 android:editable="true"
                 android:ems="10"
                 android:enabled="true"
+                android:fontFamily="@font/montserrat"
                 android:focusable="true"
+                android:textSize="18sp"
                 android:gravity="top"
                 android:hint="@string/txt_search_main"
                 android:inputType="text"
@@ -70,6 +89,7 @@
         </com.facebook.shimmer.ShimmerFrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:overScrollMode="never"
             android:id="@+id/rvMain"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

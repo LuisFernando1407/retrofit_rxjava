@@ -1,4 +1,4 @@
-package com.br.retrofit_rxjava.ui.activity.base;
+package com.br.retrofit_rxjava.ui.base;
 
 import androidx.lifecycle.ViewModel;
 
