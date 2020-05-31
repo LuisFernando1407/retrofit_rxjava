@@ -2,4 +2,6 @@
     <string name="app_name">BTC Market</string>
     <string name="txt_search_main">Search by name or price</string>
     <string name="text_bitcoins">Bitcoin Market</string>
+    <string name="text_adapter_volume">Volume</string>
+    <string name="text_adapter_price">Price</string>
 </resources>

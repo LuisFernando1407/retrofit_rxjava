@@ -3,18 +3,17 @@ package com.br.retrofit_rxjava.ui.activity.main.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatTextView;
+import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.br.retrofit_rxjava.R;
 import com.br.retrofit_rxjava.data.model.Market;
+import com.br.retrofit_rxjava.databinding.ItemMainBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +37,13 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> im
     @NonNull
     @Override
     public MainAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main, parent, false);
-        return new MainAdapter.ViewHolder(view);
+        ItemMainBinding itemMainBinding = DataBindingUtil.inflate(
+                LayoutInflater.from(parent.getContext()),
+                R.layout.item_main,
+                parent,
+                false
+        );
+        return new MainAdapter.ViewHolder(itemMainBinding);
     }
 
     @Override
@@ -50,7 +54,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> im
                 marketsFiltered.get(position)
         );
 
-        mainAdapterUtil.setDataInView();
+        mainAdapterUtil.changeColorAndSetData();
     }
 
     @Override
@@ -95,22 +99,11 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> im
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public AppCompatTextView tvVolume;
-        public AppCompatTextView tvMarket;
-        public AppCompatTextView tvPrice;
+        public ItemMainBinding itemMainBinding;
 
-        public LinearLayout llVolume;
-        public LinearLayout llPrice;
-
-        ViewHolder(View view) {
-            super(view);
-
-            this.llVolume = view.findViewById(R.id.llVolume);
-            this.llPrice = view.findViewById(R.id.llPrice);
-
-            this.tvVolume = view.findViewById(R.id.tvVolume);
-            this.tvMarket = view.findViewById(R.id.tvMarket);
-            this.tvPrice = view.findViewById(R.id.tvPrice);
+        ViewHolder(@NonNull ItemMainBinding itemMainBinding) {
+            super(itemMainBinding.getRoot());
+            this.itemMainBinding = itemMainBinding;
         }
     }
 }
