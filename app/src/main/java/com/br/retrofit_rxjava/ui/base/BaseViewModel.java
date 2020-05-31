@@ -32,7 +32,7 @@ public abstract class BaseViewModel<N extends BaseNavigator> extends ViewModel {
     protected void onCleared() {
         super.onCleared();
         /* Allows you to free resources and threads allocated to Observer through the "dispose" method */
-        compositeDisposable.dispose();
+        this.compositeDisposable.dispose();
         /* If you are doing multiple subscriptions, it is very important to clear it to avoid memory leaks */
         //compositeDisposable.clear()
     }

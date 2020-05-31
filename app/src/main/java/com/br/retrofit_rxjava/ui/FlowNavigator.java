@@ -1,4 +1,4 @@
-package com.br.retrofit_rxjava.ui.activity;
+package com.br.retrofit_rxjava.ui;
 
 import com.br.retrofit_rxjava.ui.base.BaseNavigator;
 

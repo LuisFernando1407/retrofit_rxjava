@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
-import com.br.retrofit_rxjava.ui.activity.FlowNavigator;
+import com.br.retrofit_rxjava.ui.FlowNavigator;
 import com.br.retrofit_rxjava.util.CommonUtils;
 
 public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseViewModel<?>> extends AppCompatActivity implements FlowNavigator {
