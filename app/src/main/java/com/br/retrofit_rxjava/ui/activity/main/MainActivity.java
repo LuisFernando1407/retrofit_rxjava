@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.br.retrofit_rxjava.BR;
 import com.br.retrofit_rxjava.R;
@@ -30,7 +30,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     protected MainViewModel viewModel() {
-        return ViewModelProviders.of(this).get(MainViewModel.class);
+        return new ViewModelProvider(this).get(MainViewModel.class);
     }
 
     @Override
