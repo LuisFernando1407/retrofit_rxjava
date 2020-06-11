@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.br.retrofit_rxjava">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -24,6 +25,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.main.MainActivity" />
+
     </application>
 
 </manifest>

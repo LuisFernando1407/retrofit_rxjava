@@ -4,4 +4,6 @@
     <string name="text_bitcoins">Bitcoin Market</string>
     <string name="text_adapter_volume">Volume</string>
     <string name="text_adapter_price">Price</string>
+    <string name="text_no_internet_access">No internet access</string>
+    <string name="text_connection_reestablished">Internet connection re-established</string>
 </resources>

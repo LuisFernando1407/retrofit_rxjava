@@ -4,15 +4,20 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
+import com.br.retrofit_rxjava.util.receiver.NetworkBroadcastReceiver;
+
 import timber.log.Timber;
 
 public class RetrofitRxJavaApplication extends Application {
-
     /**
-     * Instance
+     * Context
      */
     @SuppressLint("StaticFieldLeak")
     private static Context context;
+
+    /* Instance */
+    @SuppressLint("StaticFieldLeak")
+    private static RetrofitRxJavaApplication instance;
 
     @Override
     public void onCreate() {
@@ -26,9 +31,19 @@ public class RetrofitRxJavaApplication extends Application {
         /* Set context */
         RetrofitRxJavaApplication.context = getApplicationContext();
 
+        /* Instance */
+        RetrofitRxJavaApplication.instance = this;
     }
 
-    public static Context getInstance() {
+    public static synchronized RetrofitRxJavaApplication of() {
+        return RetrofitRxJavaApplication.instance;
+    }
+
+    public void setNetworkListener(NetworkBroadcastReceiver.ConnectivityReceiverListener listener){
+        NetworkBroadcastReceiver.connectivityReceiverListener = listener;
+    }
+
+    public Context getContext() {
         return RetrofitRxJavaApplication.context;
     }
 }

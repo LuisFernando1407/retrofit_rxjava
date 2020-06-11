@@ -30,7 +30,7 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements Obser
             public void onSuccess(Crypto response) {
                 if(response != null) {
                     mainAdapter = MainAdapter.of(
-                            RetrofitRxJavaApplication.getInstance(),
+                            RetrofitRxJavaApplication.of().getContext(),
                             response.ticker.markets
                     );
 

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.text.Html;
 import android.view.Window;
 
@@ -19,7 +21,7 @@ import java.util.Objects;
 public class CommonUtils {
 
     private static SharedPreferences getSessionPreferences() {
-        Context ctx = RetrofitRxJavaApplication.getInstance();
+        Context ctx = RetrofitRxJavaApplication.of().getContext();
         return ctx.getSharedPreferences("SESSION_PREFERENCES", Context.MODE_PRIVATE);
     }
 
@@ -51,6 +53,12 @@ public class CommonUtils {
         loading.setCanceledOnTouchOutside(false);
         loading.setCancelable(false);
         return loading;
+    }
+
+    public static boolean isNetworkAvailable(Context context) {
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
     }
 
     public static void alert(Context ctx, String title, String message) {

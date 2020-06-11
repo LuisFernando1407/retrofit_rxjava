@@ -11,11 +11,11 @@ public class Market {
     public Double volume;
 
     public void toastVolume(){
-        Toast.makeText(RetrofitRxJavaApplication.getInstance(), "Volume of " + this.volume, Toast.LENGTH_SHORT).show();
+        Toast.makeText(RetrofitRxJavaApplication.of().getContext(), "Volume of " + this.volume, Toast.LENGTH_SHORT).show();
     }
 
     public void toastPrice(){
-        Toast.makeText(RetrofitRxJavaApplication.getInstance(), "Price of " + this.priceFormatted(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(RetrofitRxJavaApplication.of().getContext(), "Price of " + this.priceFormatted(), Toast.LENGTH_SHORT).show();
     }
 
     @SuppressLint("DefaultLocale")
