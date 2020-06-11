@@ -5,6 +5,7 @@
  - Check internet access when opening the app, or if you have not access monitor Internet Access.
  - Consume bitcoin cryptocurrency data.
  - Search by company and value.
+ - Volume and price indicator.
  
 <p align="center"><b>See the App demo!</b></p>
  
