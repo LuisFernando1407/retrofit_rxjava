@@ -8,6 +8,6 @@
     <string name="text_connection_reestablished">Internet connection re-established</string>
 
     <string name="text_message_invalid_type_animation">
-        Animation type invalid! Check the types of animation callback available in SplashViewModel.
+        Animation type invalid! Check the types of animation callback available in BaseViewModel.
     </string>
 </resources>
