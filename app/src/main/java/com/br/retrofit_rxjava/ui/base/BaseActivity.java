@@ -27,6 +27,8 @@ import com.br.retrofit_rxjava.util.receiver.NetworkBroadcastReceiver;
 
 import java.util.Objects;
 
+import static com.br.retrofit_rxjava.ui.activity.network.NetworkViewModel.NETWORK_TAG;
+
 public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseViewModel<?>> extends AppCompatActivity implements FlowNavigator {
 
     public V viewModel;
@@ -139,7 +141,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
 
     @Override
     public void onNetworkConnectionChanged(boolean isConnected) {
-        if (!isConnected && !getClass().getSimpleName().equals("NetworkActivity")) {
+        if (!isConnected && !getClass().getSimpleName().equals(NETWORK_TAG)) {
             this.openActivity(NetworkActivity.class, false, null);
         }
     }

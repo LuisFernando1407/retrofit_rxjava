@@ -2,7 +2,6 @@ package com.br.retrofit_rxjava.ui.dialog;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Window;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModelProvider;

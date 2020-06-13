@@ -11,9 +11,11 @@ import com.br.retrofit_rxjava.R;
 import com.br.retrofit_rxjava.databinding.ActivityMainBinding;
 import com.br.retrofit_rxjava.ui.base.BaseActivity;
 import com.br.retrofit_rxjava.ui.adapter.NoResultAdapter;
+import com.br.retrofit_rxjava.ui.dialog.listener.ConfirmDialogListener;
 import com.br.retrofit_rxjava.util.CommonUtils;
 
-public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements MainNavigator {
+public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> implements
+        MainNavigator, ConfirmDialogListener {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,7 +62,19 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     }
 
     @Override
-    public void onBackPressed() {}
+    public void onBackPressed() {
+        this.onAlertConfirm(
+                R.string.text_dialog_title_default,
+                R.string.text_dialog_message_exit_default,
+                new int[] {
+                        R.string.text_dialog_button_cancel_default,
+                        R.string.text_dialog_button_yes_default
+                },
+                false,
+                null,
+                this
+        );
+    }
 
     @Override
     public void showCoins() {
@@ -75,13 +89,23 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         this.dismissShimmerLayout();
 
         this.databinding.llSearch.setVisibility(View.GONE);
-        this.databinding.rvMain.setAdapter(NoResultAdapter.of(this, "NO RESULT AVAILABLE"));
+        this.databinding.rvMain.setAdapter(
+                NoResultAdapter.of(
+                        this,
+                        getResources().getString(R.string.text_no_result_available)
+                )
+        );
         this.databinding.rvMain.setLayoutManager(CommonUtils.getLinearLayoutMangerDefault(this, false));
     }
 
     private void dismissShimmerLayout(){
-        /* Example shimmer layout - dismiss */
+        /* Shimmer layout dismiss */
         this.databinding.shimmerLayout.setVisibility(View.GONE);
         this.databinding.shimmerLayout.stopShimmerAnimation();
+    }
+
+    @Override
+    public void onConfirm(Object payload) {
+        this.finishAndRemoveTask();
     }
 }
