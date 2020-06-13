@@ -45,6 +45,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     }
 
     @Override
+    protected boolean verifyChangedNetworkState() {
+        return true;
+    }
+
+    @Override
     public void beforeRequest() {
         this.showLoading(true);
     }

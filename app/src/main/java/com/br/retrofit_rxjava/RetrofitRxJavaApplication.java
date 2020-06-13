@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
+import com.br.retrofit_rxjava.ui.FlowNavigator;
 import com.br.retrofit_rxjava.util.receiver.NetworkBroadcastReceiver;
 
 import timber.log.Timber;
@@ -39,8 +40,8 @@ public class RetrofitRxJavaApplication extends Application {
         return RetrofitRxJavaApplication.instance;
     }
 
-    public void setNetworkListener(NetworkBroadcastReceiver.ConnectivityReceiverListener listener){
-        NetworkBroadcastReceiver.connectivityReceiverListener = listener;
+    public void setNetworkListener(FlowNavigator navigator){
+        NetworkBroadcastReceiver.flowNavigator = navigator;
     }
 
     public Context getContext() {

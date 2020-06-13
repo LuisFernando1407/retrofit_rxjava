@@ -68,5 +68,4 @@ public class CommonUtils {
         alertDialog.setMessage(Html.fromHtml(message));
         alertDialog.show();
     }
-
 }
