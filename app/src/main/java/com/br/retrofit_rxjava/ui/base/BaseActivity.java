@@ -8,13 +8,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Window;
-import android.widget.LinearLayout;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
@@ -31,13 +29,13 @@ import java.util.Objects;
 
 public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseViewModel<?>> extends AppCompatActivity implements FlowNavigator {
 
-    private Dialog dialog;
     public V viewModel;
 
     public B databinding;
 
     private BroadcastReceiver networkReceiver;
 
+    private Dialog dialog;
     private ConfirmDialog confirmDialog;
 
     private static final String FILTER_ACTION_CONNECTIVITY_CHANGE = "android.net.conn.CONNECTIVITY_CHANGE";
@@ -109,7 +107,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         if(buttons.length != 2)
             throw new RuntimeException(getResources().getString(R.string.text_buttons_invalid_size));
 
-        this.confirmDialog = new ConfirmDialog(this);
+        this.confirmDialog = ConfirmDialog.of(this);
 
         this.confirmDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 

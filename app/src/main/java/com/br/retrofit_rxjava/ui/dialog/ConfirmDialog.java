@@ -16,8 +16,12 @@ import com.br.retrofit_rxjava.ui.dialog.base.BaseDialog;
 public class ConfirmDialog extends BaseDialog<DialogConfirmBinding, ConfirmDialogViewModel>
         implements ConfirmDialogNavigator {
 
-    public ConfirmDialog(@NonNull Activity activity){
+    private ConfirmDialog(Activity activity){
         super(activity);
+    }
+
+    public static ConfirmDialog of(@NonNull Activity activity){
+        return new ConfirmDialog(activity);
     }
 
     @Override
