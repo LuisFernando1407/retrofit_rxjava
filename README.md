@@ -7,6 +7,9 @@
  - Search by company and value.
  - Volume and price indicator.
  
+### News 
+- The news is in the branch <b>develop</b> ;)
+ 
 <p align="center"><b>See the App demo!</b></p>
  
 <p align="center">
