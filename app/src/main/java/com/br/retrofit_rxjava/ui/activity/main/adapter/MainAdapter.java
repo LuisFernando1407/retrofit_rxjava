@@ -13,7 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.br.retrofit_rxjava.R;
 import com.br.retrofit_rxjava.data.model.Market;
-import com.br.retrofit_rxjava.databinding.ItemMainBinding;
+import com.br.retrofit_rxjava.databinding.AdapterItemMainBinding;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +38,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> im
     @NonNull
     @Override
     public MainAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemMainBinding itemMainBinding = DataBindingUtil.inflate(
+        AdapterItemMainBinding itemMainBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
-                R.layout.item_main,
+                R.layout.adapter_item_main,
                 parent,
                 false
         );
@@ -99,9 +100,9 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.ViewHolder> im
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public ItemMainBinding itemMainBinding;
+        public AdapterItemMainBinding itemMainBinding;
 
-        ViewHolder(@NonNull ItemMainBinding itemMainBinding) {
+        ViewHolder(@NonNull AdapterItemMainBinding itemMainBinding) {
             super(itemMainBinding.getRoot());
             this.itemMainBinding = itemMainBinding;
         }

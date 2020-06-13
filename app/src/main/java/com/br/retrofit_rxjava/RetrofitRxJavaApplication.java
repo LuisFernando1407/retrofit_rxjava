@@ -40,8 +40,8 @@ public class RetrofitRxJavaApplication extends Application {
         return RetrofitRxJavaApplication.instance;
     }
 
-    public void setNetworkListener(FlowNavigator navigator){
-        NetworkBroadcastReceiver.flowNavigator = navigator;
+    public void setNetworkListener(FlowNavigator listener){
+        NetworkBroadcastReceiver.listener = listener;
     }
 
     public Context getContext() {

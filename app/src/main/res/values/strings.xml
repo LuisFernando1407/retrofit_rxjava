@@ -10,4 +10,13 @@
     <string name="text_message_invalid_type_animation">
         Animation type invalid! Check the types of animation callback available in BaseViewModel.
     </string>
+
+    <string name="text_buttons_invalid_size">
+        Button size invalid! Only 2 values are allowed for the buttons.
+    </string>
+
+    <string name="text_dialog_button_cancel_default">No</string>
+    <string name="text_dialog_button_yes_default">Yes</string>
+    <string name="text_dialog_title_default">Attention!</string>
+    <string name="text_dialog_message_exit_default">Do you really want to\nexit the app?</string>
 </resources>

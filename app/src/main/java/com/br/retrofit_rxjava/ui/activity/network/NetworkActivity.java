@@ -12,10 +12,12 @@ import com.br.retrofit_rxjava.databinding.ActivityNetworkBinding;
 import com.br.retrofit_rxjava.ui.activity.main.MainActivity;
 import com.br.retrofit_rxjava.ui.activity.splash.SplashViewModel;
 import com.br.retrofit_rxjava.ui.base.BaseActivity;
+import com.br.retrofit_rxjava.ui.dialog.listener.ConfirmDialogListener;
 
 import static com.br.retrofit_rxjava.ui.base.BaseViewModel.TYPE_ANIMATION_INTERNET_ACCESS_SUCCESS;
 
-public class NetworkActivity extends BaseActivity<ActivityNetworkBinding, NetworkViewModel> implements NetworkNavigator {
+public class NetworkActivity extends BaseActivity<ActivityNetworkBinding, NetworkViewModel>
+        implements NetworkNavigator, ConfirmDialogListener {
 
     @Override
     protected void onStart() {
@@ -69,6 +71,9 @@ public class NetworkActivity extends BaseActivity<ActivityNetworkBinding, Networ
 
     @Override
     public <A> void connectionReestablished(Class<A> activity) {
+        /* Case dialog is open */
+        this.dismissAlertConfirm();
+
         /* Details */
         this.databinding.labelNoInternet.setVisibility(View.GONE);
         this.databinding.llConnectionReestablished.setVisibility(View.VISIBLE);
@@ -83,9 +88,33 @@ public class NetworkActivity extends BaseActivity<ActivityNetworkBinding, Networ
         );
     }
 
-    private boolean isSplash() {
-        Bundle bundle = getIntent().getExtras();
+    @Override
+    public void onBackPressed() {
+        this.onAlertConfirm(
+                R.string.text_dialog_title_default,
+                R.string.text_dialog_message_exit_default,
+                new int[] {
+                        R.string.text_dialog_button_cancel_default,
+                        R.string.text_dialog_button_yes_default
+                },
+                false,
+                null,
+                this
+        );
+    }
 
-        return bundle != null && bundle.containsKey(SplashViewModel.SPLASH_SCREEN);
+    private boolean isSplash() {
+        return getIntent().getExtras() != null &&
+                getIntent().getExtras().containsKey(SplashViewModel.SPLASH_SCREEN);
+    }
+
+    @Override
+    public void onConfirm(Object payload) {
+        if(isSplash()){
+            this.finishAndRemoveTask();
+            return;
+        }
+
+        this.finishAffinity();
     }
 }

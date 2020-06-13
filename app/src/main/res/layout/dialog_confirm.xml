@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.br.retrofit_rxjava.ui">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.br.retrofit_rxjava.ui.dialog.ConfirmDialogViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/bg_dialog"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:tint="@color/colorPrimary"
+                app:srcCompat="@drawable/ic_attention" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center"
+                android:text="@={viewModel.textTitle}"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                tools:text="@string/text_dialog_title_default" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat"
+                android:gravity="center"
+                android:text="@={viewModel.textMessage}"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                tools:text="@string/text_dialog_message_exit_default" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_dialog_button"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:onClick="@{() -> viewModel.dismissPress()}"
+                    android:text="@={viewModel.textButtonCancel}"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="7pt"
+                    tools:text="@string/text_dialog_button_cancel_default" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_dialog_button"
+                    android:fontFamily="@font/montserrat"
+                    android:onClick="@{() -> viewModel.confirmPress()}"
+                    android:text="@={viewModel.textButtonSuccess}"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="6pt"
+                    tools:text="@string/text_dialog_button_yes_default" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

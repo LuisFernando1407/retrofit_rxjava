@@ -4,23 +4,30 @@ import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.Window;
+import android.widget.LinearLayout;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 
+import com.br.retrofit_rxjava.R;
 import com.br.retrofit_rxjava.RetrofitRxJavaApplication;
 import com.br.retrofit_rxjava.ui.FlowNavigator;
-import com.br.retrofit_rxjava.ui.activity.main.MainActivity;
 import com.br.retrofit_rxjava.ui.activity.network.NetworkActivity;
-import com.br.retrofit_rxjava.ui.activity.network.NetworkNavigator;
+import com.br.retrofit_rxjava.ui.dialog.ConfirmDialog;
+import com.br.retrofit_rxjava.ui.dialog.listener.ConfirmDialogListener;
 import com.br.retrofit_rxjava.util.CommonUtils;
 import com.br.retrofit_rxjava.util.receiver.NetworkBroadcastReceiver;
 
-import timber.log.Timber;
+import java.util.Objects;
 
 public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseViewModel<?>> extends AppCompatActivity implements FlowNavigator {
 
@@ -31,6 +38,8 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
 
     private BroadcastReceiver networkReceiver;
 
+    private ConfirmDialog confirmDialog;
+
     private static final String FILTER_ACTION_CONNECTIVITY_CHANGE = "android.net.conn.CONNECTIVITY_CHANGE";
 
     @Override
@@ -38,7 +47,19 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         super.onCreate(savedInstanceState);
 
         this.performDataBinding();
+        this.confirmDialog = null;
         this.dialog = CommonUtils.loadingDialog(this);
+    }
+
+    /**
+     * Configure data bind with lifecycle of this Activity.
+     */
+    public void performDataBinding() {
+        this.databinding = DataBindingUtil.setContentView(this, getLayoutResource());
+        this.viewModel = this.viewModel();
+
+        this.databinding.setVariable(this.bindingVariable(), this.viewModel);
+        this.databinding.executePendingBindings();
     }
 
     /**
@@ -52,11 +73,14 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
     protected abstract V viewModel();
 
     /**
-     * Layout resource companyId.
+     * Layout resource.
      */
     @LayoutRes
     protected abstract int getLayoutResource();
 
+    /**
+     *  Monitor the state of the internet
+     */
     protected abstract boolean verifyChangedNetworkState();
 
     public void showLoading(boolean show) {
@@ -65,17 +89,6 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         } else {
             if (dialog.isShowing()) dialog.dismiss();
         }
-    }
-
-    /**
-     * Configure data bind with lifecycle of this Activity.
-     */
-    public void performDataBinding() {
-        this.databinding = DataBindingUtil.setContentView(this, getLayoutResource());
-        this.viewModel = this.viewModel();
-
-        this.databinding.setVariable(this.bindingVariable(), this.viewModel);
-        this.databinding.executePendingBindings();
     }
 
     @Override
@@ -90,17 +103,39 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         CommonUtils.alert(this, title, message);
     }
 
-    public void onRegisterReceiver() {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(FILTER_ACTION_CONNECTIVITY_CHANGE);
+    @Override
+    public void onAlertConfirm(@StringRes int title, @StringRes int message, @StringRes int[] buttons, boolean isCancelableInTouch,
+                               Object payload, ConfirmDialogListener listener) {
+        if(buttons.length != 2)
+            throw new RuntimeException(getResources().getString(R.string.text_buttons_invalid_size));
 
-        this.networkReceiver = new NetworkBroadcastReceiver();
-        this.registerReceiver(this.networkReceiver, filter);
+        this.confirmDialog = new ConfirmDialog(this);
+
+        this.confirmDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        this.confirmDialog.setCancelable(isCancelableInTouch);
+        this.confirmDialog.setCanceledOnTouchOutside(isCancelableInTouch);
+
+        this.confirmDialog.viewModel().setData(
+                getResources().getString(title),
+                getResources().getString(message),
+                getResources().getString(buttons[0]),
+                getResources().getString(buttons[1]),
+                listener,
+                payload
+        );
+
+        this.confirmDialog.show();
+
+        Objects.requireNonNull(
+                this.confirmDialog.getWindow()).setBackgroundDrawable(
+                new ColorDrawable(Color.TRANSPARENT)
+        );
     }
 
-    public void onUnregisterReceiver() {
-        if (this.networkReceiver != null) {
-            this.unregisterReceiver(this.networkReceiver);
+    protected void dismissAlertConfirm() {
+        if(this.confirmDialog != null && this.confirmDialog.isShowing()){
+            this.confirmDialog.dismiss();
         }
     }
 
@@ -121,15 +156,31 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         startActivity(intent);
     }
 
+    public void onRegisterReceiver() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(FILTER_ACTION_CONNECTIVITY_CHANGE);
+
+        this.networkReceiver = new NetworkBroadcastReceiver();
+        this.registerReceiver(this.networkReceiver, filter);
+    }
+
+    public void onUnregisterReceiver() {
+        if (this.networkReceiver != null) {
+            this.unregisterReceiver(this.networkReceiver);
+        }
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
 
-        if (this.verifyChangedNetworkState()) {
+        /* Checks whether the activity allows you to monitor the state of the internet */
+        if(this.verifyChangedNetworkState()) {
             this.onRegisterReceiver();
-        } else {
-            this.networkReceiver = null;
+            return;
         }
+
+        this.networkReceiver = null;
     }
 
     @Override
@@ -143,12 +194,11 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         this.onUnregisterReceiver();
     }
 
     @Override
     public void onBackPress() {
-        this.onBackPressed();
+        super.onBackPressed();
     }
 }

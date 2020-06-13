@@ -11,7 +11,7 @@ import com.br.retrofit_rxjava.ui.FlowNavigator;
 
 public class NetworkBroadcastReceiver extends BroadcastReceiver {
 
-    public static FlowNavigator flowNavigator;
+    public static FlowNavigator listener;
 
     @SuppressLint("UnsafeProtectedBroadcastReceiver")
     @Override
@@ -22,8 +22,8 @@ public class NetworkBroadcastReceiver extends BroadcastReceiver {
         boolean isConnected = activeNetwork != null
                 && activeNetwork.isConnectedOrConnecting();
 
-        if (flowNavigator != null) {
-            flowNavigator.onNetworkConnectionChanged(isConnected);
+        if (listener != null) {
+            listener.onNetworkConnectionChanged(isConnected);
         }
     }
 }

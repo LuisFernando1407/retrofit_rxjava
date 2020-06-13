@@ -28,7 +28,7 @@ public class NoResultAdapter extends RecyclerView.Adapter<NoResultAdapter.NoResu
     @NonNull
     @Override
     public NoResultHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_no_result, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_item_no_result, parent, false);
         return new NoResultAdapter.NoResultHolder(v);
     }
 

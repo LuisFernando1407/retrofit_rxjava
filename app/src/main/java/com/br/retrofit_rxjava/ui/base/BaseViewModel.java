@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModel;
 
 import com.br.retrofit_rxjava.R;
 import com.br.retrofit_rxjava.RetrofitRxJavaApplication;
-import com.br.retrofit_rxjava.ui.activity.main.MainActivity;
 import com.br.retrofit_rxjava.ui.activity.network.NetworkActivity;
 import com.br.retrofit_rxjava.ui.activity.splash.SplashViewModel;
 import com.br.retrofit_rxjava.util.CommonUtils;
@@ -26,10 +25,6 @@ public abstract class BaseViewModel<N extends BaseNavigator> extends ViewModel {
     private WeakReference<N> navigator = null;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    public CompositeDisposable compositeDisposable() {
-        return compositeDisposable;
-    }
-
     public N navigator() {
         return this.navigator.get();
     }
@@ -38,15 +33,16 @@ public abstract class BaseViewModel<N extends BaseNavigator> extends ViewModel {
         this.navigator = new WeakReference<>(navigator);
     }
 
-    public void watchDisposable(Disposable disposable) {
-        if (disposable != null) this.compositeDisposable.add(disposable);
-    }
-
+    /*
+    *  @Param int type - type final animation
+    *  @Param Class<A> activity? - for redirect or null to return previous activity (onBackPressed)
+    *
+    * Use this method when you want to treat the end of the lottie's animation
+    * */
     public <A> Animator.AnimatorListener callbackAnimator(int type, Class<A> activity) {
         return new Animator.AnimatorListener() {
             @Override
-            public void onAnimationStart(Animator animation) {
-            }
+            public void onAnimationStart(Animator animation) {}
 
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -57,7 +53,7 @@ public abstract class BaseViewModel<N extends BaseNavigator> extends ViewModel {
                         } else {
                             new Handler().postDelayed(() -> {
                                 Bundle bundle = new Bundle();
-                                bundle.putString(SplashViewModel.SPLASH_SCREEN, "yes");
+                                bundle.putString(SplashViewModel.SPLASH_SCREEN, SplashViewModel.SPLASH_SCREEN_TAG);
                                 navigator().openActivity(NetworkActivity.class, true, bundle);
                             }, 1000L);
                         }
@@ -80,13 +76,19 @@ public abstract class BaseViewModel<N extends BaseNavigator> extends ViewModel {
             }
 
             @Override
-            public void onAnimationCancel(Animator animation) {
-            }
+            public void onAnimationCancel(Animator animation) {}
 
             @Override
-            public void onAnimationRepeat(Animator animation) {
-            }
+            public void onAnimationRepeat(Animator animation) {}
         };
+    }
+
+    public CompositeDisposable compositeDisposable() {
+        return compositeDisposable;
+    }
+
+    public void watchDisposable(Disposable disposable) {
+        if (disposable != null) this.compositeDisposable.add(disposable);
     }
 
     @Override
