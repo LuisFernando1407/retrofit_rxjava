@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Override
     protected void onResume() {
         super.onResume();
-        this.viewModel.requestCrypto("btc");
+        this.viewModel.requestCrypto(getResources().getString(R.string.app_crypto_request));
     }
 
     @Override
