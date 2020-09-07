@@ -33,22 +33,22 @@ jobs:
 
       # Step 3: Check the code with Android linter
       - name: Run Android Linter
-        run: ./gradlew lintStagingDebug
+        run: ./gradlew lintDebug
 
       # Step 4: Yun your unit tests
       - name: Run Unit Tests
-        run: ./gradlew testStagingDebugUnitTest
+        run: bash ./gradlew test --stacktrace
 
       # Step 4: Assemble debug apk to send to firebase test lab
       - name: Assemble Debug APK
-        run: ./gradlew assembleStagingDebug
+        run: ./gradlew assembleDebug
 
       # Step 4: Assemble debug test apk to send to firebase test lab
       - name: Assemble Debug Test APK
-        run: ./gradlew assembleStagingDebugAndroidTest
+        run: ./gradlew assembleDebugAndroidTest
 
       # Step 4: Run instrumented tests on firebase test lab
-      - name: Run instrumented Tests on Firebase Test Lab
+      - name: Run Instrumented Tests on Firebase Test Lab
         uses: asadmansr/Firebase-Test-Lab-Action@v1.0
         with:
           arg-spec: 'tests.yml:android-pixel-4'
