@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "183652883984",
+    "firebase_url": "https://btc-market-app.firebaseio.com",
+    "project_id": "btc-market-app",
+    "storage_bucket": "btc-market-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183652883984:android:58a3ec04877c6e00407495",
+        "android_client_info": {
+          "package_name": "com.br.retrofit_rxjava"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "183652883984-tr4869rnssmh9g8b6uitp65esact8b9p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.br.retrofit_rxjava",
+            "certificate_hash": "949be47da9f4cb10b472550410b020c771f92df0"
+          }
+        },
+        {
+          "client_id": "183652883984-0bihaq64npnulccljvi54o4n9v0aptfj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSi8D5aELYyQkOggVJzOPLe1sPlf1h2a4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "183652883984-0bihaq64npnulccljvi54o4n9v0aptfj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
