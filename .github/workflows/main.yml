@@ -28,8 +28,8 @@ jobs:
         run: echo $FIREBASE_CONFIG > app/google-services.json
 
       # Step 3: Check the code with ktlint, you can remove this job if you don't use ktlint
-      - name: Run Kotlin Linter
-        run: ./gradlew ktlintStagingDebugCheck
+      #- name: Run Kotlin Linter
+        #run: ./gradlew ktlintStagingDebugCheck
 
       # Step 3: Check the code with Android linter
       - name: Run Android Linter
