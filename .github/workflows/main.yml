@@ -29,11 +29,11 @@ jobs:
 
       # Step 3: Check the code with ktlint, you can remove this job if you don't use ktlint
       #- name: Run Kotlin Linter
-        #run: ./gradlew ktlintStagingDebugCheck
+        #run: ./gradlew ktlintDebugCheck
 
       # Step 3: Check the code with Android linter
       - name: Run Android Linter
-        run: ./gradlew lintDebug
+        run: ./gradlew lintDebug --stacktrace
 
       # Step 4: Yun your unit tests
       - name: Run Unit Tests
@@ -41,11 +41,11 @@ jobs:
 
       # Step 4: Assemble debug apk to send to firebase test lab
       - name: Assemble Debug APK
-        run: ./gradlew assembleDebug
+        run: ./gradlew assembleDebug --stacktrace
 
       # Step 4: Assemble debug test apk to send to firebase test lab
       - name: Assemble Debug Test APK
-        run: ./gradlew assembleDebugAndroidTest
+        run: ./gradlew assembleDebugAndroidTest --stacktrace
 
       # Step 4: Run instrumented tests on firebase test lab
       - name: Run Instrumented Tests on Firebase Test Lab
