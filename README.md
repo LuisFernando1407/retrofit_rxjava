@@ -8,4 +8,3 @@
  - Consume bitcoin cryptocurrency data.
  - Search by company and value.
  - Volume and price indicator.
-
