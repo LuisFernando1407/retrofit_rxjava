@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import com.br.retrofit_rxjava.ui.FlowNavigator;
+
 public class NetworkBroadcastReceiver extends BroadcastReceiver {
 
-    public static ConnectivityReceiverListener connectivityReceiverListener;
+    public static FlowNavigator listener;
 
     @SuppressLint("UnsafeProtectedBroadcastReceiver")
     @Override
@@ -20,12 +22,8 @@ public class NetworkBroadcastReceiver extends BroadcastReceiver {
         boolean isConnected = activeNetwork != null
                 && activeNetwork.isConnectedOrConnecting();
 
-        if (connectivityReceiverListener != null) {
-            connectivityReceiverListener.onNetworkConnectionChanged(isConnected);
+        if (listener != null) {
+            listener.onNetworkConnectionChanged(isConnected);
         }
-    }
-
-    public interface ConnectivityReceiverListener {
-        void onNetworkConnectionChanged(boolean isConnected);
     }
 }

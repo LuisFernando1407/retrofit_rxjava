@@ -23,12 +23,12 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements Obser
     /* Observer search */
     public ObserverTextWatcher observerTextWatcher = ObserverTextWatcher.of(500, this);
 
-    public void requestCrypto(String crypto){
+    public void requestCrypto(String crypto) {
         /* Callback */
         Callback<Crypto, Throwable> callback = new Callback<Crypto, Throwable>() {
             @Override
             public void onSuccess(Crypto response) {
-                if(response != null) {
+                if (response != null) {
                     mainAdapter = MainAdapter.of(
                             RetrofitRxJavaApplication.of().getContext(),
                             response.ticker.markets
@@ -52,7 +52,7 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements Obser
         this.watchDisposable(this.mainRepository.getCoins(crypto, callback));
     }
 
-    private void dispatchError(){
+    private void dispatchError() {
         this.navigator().afterRequest();
         this.navigator().showErrorOrEmptyList();
     }
