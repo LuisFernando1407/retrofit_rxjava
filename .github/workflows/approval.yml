@@ -37,7 +37,7 @@ jobs:
       - name: Lint results
         uses: actions/upload-artifact@v1
         with:
-          name: app
+          name: lint-results
           path: app/build/reports/lint-results-debug.html
 
   apk:
@@ -66,7 +66,7 @@ jobs:
       - name: Upload debug APK
         uses: actions/upload-artifact@v1
         with:
-          name: app-debug
+          name: apk-debug
           path: app/build/outputs/apk/debug/app-debug.apk
 
       # Assemble debug apk to send to firebase test lab
@@ -76,7 +76,7 @@ jobs:
       - name: Upload test debug APK
         uses: actions/upload-artifact@v1
         with:
-          name: app-debug-androidTest
+          name: apk-debug-androidTest
           path: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
 
   testing:
