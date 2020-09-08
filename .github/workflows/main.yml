@@ -84,6 +84,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v1
+        
       - name: Download app APK
         uses: actions/download-artifact@v1
         with:
@@ -95,13 +97,13 @@ jobs:
           name: app-debug-androidTest
 
       - name: Login to google cloud
-      - uses: actions/checkout@v2
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
-          version: '290.0.1'
-          project_id: ${{ secrets.FIREBASE_PROJECT_ID }}
+        uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with: 
+          version: '270.0.0' 
           service_account_key: ${{ secrets.GCLOUD_AUTH }}
-          export_default_credentials: true
+          
+      - name: Set current project in google cloud
+        run: gcloud config set project ${{ secrets.FIREBASE_PROJECT_ID }}
 
       # Run unit tests
       - name: Run unit tests
