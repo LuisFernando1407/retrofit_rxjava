@@ -37,7 +37,7 @@ jobs:
       - name: Lint results
         uses: actions/upload-artifact@v1
         with:
-          name: app
+          name: lint-results
           path: app/build/reports/lint-results-debug.html
 
   apk:
@@ -60,23 +60,23 @@ jobs:
         run: echo $GOOGLE_SERVICES > app/google-services.json
 
       # Assemble debug apk to send to firebase test lab
-      - name: Assemble app debug APK
+      - name: Assemble debug APK
         run: ./gradlew assembleDebug --stacktrace
 
-      - name: Upload app APK
+      - name: Upload debug APK
         uses: actions/upload-artifact@v1
         with:
-          name: app-debug
+          name: apk-debug
           path: app/build/outputs/apk/debug/app-debug.apk
 
       # Assemble debug apk to send to firebase test lab
-      - name: Assemble app tests debug apk
+      - name: Assemble tests debug apk
         run: ./gradlew assembleDebugAndroidTest --stacktrace
 
-      - name: Upload test APK
+      - name: Upload test debug APK
         uses: actions/upload-artifact@v1
         with:
-          name: app-debug-androidTest
+          name: apk-debug-androidTest
           path: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
 
   testing:
@@ -89,12 +89,12 @@ jobs:
       - name: Clone git-checkout v1
         uses: actions/checkout@v1
         
-      - name: Download app APK
+      - name: Download debug APK
         uses: actions/download-artifact@v1
         with:
           name: app-debug
 
-      - name: Download android test APK
+      - name: Download test debug APK
         uses: actions/download-artifact@v1
         with:
           name: app-debug-androidTest
