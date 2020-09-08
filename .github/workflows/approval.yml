@@ -89,12 +89,12 @@ jobs:
       - name: Clone git-checkout v1
         uses: actions/checkout@v1
         
-      - name: Download app APK
+      - name: Download APK-debug
         uses: actions/download-artifact@v1
         with:
           name: app-debug
 
-      - name: Download android test APK
+      - name: Download test APK-debug
         uses: actions/download-artifact@v1
         with:
           name: app-debug-androidTest
