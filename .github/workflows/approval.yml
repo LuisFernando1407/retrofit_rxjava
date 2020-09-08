@@ -92,12 +92,12 @@ jobs:
       - name: Download debug APK
         uses: actions/download-artifact@v1
         with:
-          name: app-debug
+          name: apk-debug
 
       - name: Download test debug APK
         uses: actions/download-artifact@v1
         with:
-          name: app-debug-androidTest
+          name: apk-debug-androidTest
 
       - name: Login to google cloud
         uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
