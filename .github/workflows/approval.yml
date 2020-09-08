@@ -60,20 +60,20 @@ jobs:
         run: echo $GOOGLE_SERVICES > app/google-services.json
 
       # Assemble debug apk to send to firebase test lab
-      - name: Assemble app debug APK
+      - name: Assemble debug APK
         run: ./gradlew assembleDebug --stacktrace
 
-      - name: Upload app APK
+      - name: Upload debug APK
         uses: actions/upload-artifact@v1
         with:
           name: app-debug
           path: app/build/outputs/apk/debug/app-debug.apk
 
       # Assemble debug apk to send to firebase test lab
-      - name: Assemble app tests debug apk
+      - name: Assemble tests debug apk
         run: ./gradlew assembleDebugAndroidTest --stacktrace
 
-      - name: Upload test APK
+      - name: Upload test debug APK
         uses: actions/upload-artifact@v1
         with:
           name: app-debug-androidTest
@@ -89,12 +89,12 @@ jobs:
       - name: Clone git-checkout v1
         uses: actions/checkout@v1
         
-      - name: Download APK-debug
+      - name: Download debug APK
         uses: actions/download-artifact@v1
         with:
           name: app-debug
 
-      - name: Download test APK-debug
+      - name: Download test debug APK
         uses: actions/download-artifact@v1
         with:
           name: app-debug-androidTest
