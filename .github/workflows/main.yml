@@ -84,8 +84,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-
       - name: Download app APK
         uses: actions/download-artifact@v1
         with:
@@ -97,10 +95,13 @@ jobs:
           name: app-debug-androidTest
 
       - name: Login to google cloud
-          uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-          with:
-            version: `270.0.0`
-            service_account_key: ${{ secrets.GCLOUD_AUTH }}
+      - uses: actions/checkout@v2
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: '290.0.1'
+          project_id: ${{ secrets.FIREBASE_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCLOUD_AUTH }}
+          export_default_credentials: true
 
       # Run unit tests
       - name: Run unit tests
@@ -108,4 +109,4 @@ jobs:
 
       # Run instrumented tests on firebase test lab
       - name: Run instrumentation tests in firebase test lab
-          run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=29,locale=en,orientation=portrait
+        run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=29,locale=en,orientation=portrait
