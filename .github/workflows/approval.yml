@@ -15,7 +15,7 @@ jobs:
     # Check the code with Android Lint
     # If you use kotlin use ktlint
     steps:
-      - name: Clone git/checkout v1
+      - name: Clone git-checkout v1
         uses: actions/checkout@v1
 
       - name: set up JDK 1.8
@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clone git/checkout v1
+      - name: Clone git-checkout v1
         uses: actions/checkout@v1
         
       - name: Set up JDK 1.8
@@ -86,7 +86,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clone git/checkout v1
+      - name: Clone git-checkout v1
         uses: actions/checkout@v1
         
       - name: Download app APK
@@ -108,10 +108,16 @@ jobs:
       - name: Set current project in google cloud
         run: gcloud config set project ${{ secrets.FIREBASE_PROJECT_ID }}
 
+      # Decode google services configuration file
+      - name: Decode google-services.json
+        env:
+          GOOGLE_SERVICES: ${{ secrets.GOOGLE_SERVICES }}
+        run: echo $GOOGLE_SERVICES > app/google-services.json
+
       # Run unit tests
       - name: Run unit tests
         run: ./gradlew test --stacktrace
 
       # Run instrumented tests on firebase test lab
-      - name: Run instrumentation tests in firebase test lab
+      - name: Run instrumented tests in firebase test lab
         run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=29,locale=en,orientation=portrait
