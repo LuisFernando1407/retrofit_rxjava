@@ -15,7 +15,7 @@ jobs:
     # Check the code with Android Lint
     # If you use kotlin use ktlint
     steps:
-      - name: Clone Repo
+      - name: Clone repo
         uses: actions/checkout@v1
 
       - name: set up JDK 1.8
@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clone Repo
+      - name: Clone repo
         uses: actions/checkout@v1
 
       - name: Set up JDK 1.8
@@ -54,20 +54,26 @@ jobs:
         with:
           java-version: 1.8
 
+      # Decode google services configuration file
+      - name: Decode google-services.json
+        env:
+          FIREBASE_CONFIG: ${{ secrets.FIREBASE_CONFIG }}
+        run: echo $FIREBASE_CONFIG > app/google-services.json
+
       # Run unit tests
-      - name: Run Unit Tests
+      - name: Run unit tests
         run: ./gradlew test --stacktrace
 
       # Assemble debug apk to send to firebase test lab
-      - name: Assemble Debug APK
+      - name: Assemble debug APK
         run: ./gradlew assembleDebug --stacktrace
 
       # Assemble debug test apk to send to firebase test lab
-      - name: Assemble Debug Test APK
+      - name: Assemble debug test APK
         run: ./gradlew assembleDebugAndroidTest --stacktrace
 
       # Run instrumented tests on firebase test lab
-      - name: Run Instrumented Tests on Firebase Test Lab
+      - name: Run instrumented tests on firebase test lab
         uses: asadmansr/Firebase-Test-Lab-Action@v1.0
         with:
           arg-spec: 'tests.yml:android-pixel-4'
