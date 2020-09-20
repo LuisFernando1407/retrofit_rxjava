@@ -12,7 +12,7 @@ import com.br.retrofit_rxjava.databinding.ActivitySplashBinding;
 import com.br.retrofit_rxjava.ui.activity.main.MainActivity;
 import com.br.retrofit_rxjava.ui.base.BaseActivity;
 
-import static com.br.retrofit_rxjava.ui.base.BaseViewModel.TYPE_ANIMATION_SPLASH;
+import static com.br.retrofit_rxjava.ui.base.vm.BaseViewModel.TYPE_ANIMATION_SPLASH;
 
 public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashViewModel> implements
         SplashNavigator {

@@ -120,4 +120,4 @@ jobs:
 
       # Run instrumented tests on firebase test lab
       - name: Run instrumented tests in firebase test lab
-        run: gcloud firebase test android run --type instrumentation --app app-debug/app-debug.apk --test app-debug-androidTest/app-debug-androidTest.apk --device model=Pixel2,version=29,locale=en,orientation=portrait
+        run: gcloud firebase test android run --type instrumentation --app app-debug/apk-debug.apk --test app-debug-androidTest/apk-debug-androidTest.apk --device model=Pixel2,version=29,locale=en,orientation=portrait

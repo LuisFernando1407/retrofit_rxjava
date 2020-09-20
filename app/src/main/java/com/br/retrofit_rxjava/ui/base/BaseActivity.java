@@ -20,6 +20,7 @@ import com.br.retrofit_rxjava.R;
 import com.br.retrofit_rxjava.RetrofitRxJavaApplication;
 import com.br.retrofit_rxjava.ui.FlowNavigator;
 import com.br.retrofit_rxjava.ui.activity.network.NetworkActivity;
+import com.br.retrofit_rxjava.ui.base.vm.BaseViewModel;
 import com.br.retrofit_rxjava.ui.dialog.ConfirmDialog;
 import com.br.retrofit_rxjava.ui.dialog.listener.ConfirmDialogListener;
 import com.br.retrofit_rxjava.util.CommonUtils;
