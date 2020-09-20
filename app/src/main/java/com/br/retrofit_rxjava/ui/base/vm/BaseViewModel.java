@@ -1,4 +1,4 @@
-package com.br.retrofit_rxjava.ui.base;
+package com.br.retrofit_rxjava.ui.base.vm;
 
 import android.animation.Animator;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import com.br.retrofit_rxjava.R;
 import com.br.retrofit_rxjava.RetrofitRxJavaApplication;
 import com.br.retrofit_rxjava.ui.activity.network.NetworkActivity;
 import com.br.retrofit_rxjava.ui.activity.splash.SplashViewModel;
+import com.br.retrofit_rxjava.ui.base.BaseNavigator;
 import com.br.retrofit_rxjava.util.CommonUtils;
 
 import java.lang.ref.WeakReference;

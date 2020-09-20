@@ -14,7 +14,7 @@ import com.br.retrofit_rxjava.ui.activity.splash.SplashViewModel;
 import com.br.retrofit_rxjava.ui.base.BaseActivity;
 import com.br.retrofit_rxjava.ui.dialog.listener.ConfirmDialogListener;
 
-import static com.br.retrofit_rxjava.ui.base.BaseViewModel.TYPE_ANIMATION_INTERNET_ACCESS_SUCCESS;
+import static com.br.retrofit_rxjava.ui.base.vm.BaseViewModel.TYPE_ANIMATION_INTERNET_ACCESS_SUCCESS;
 
 public class NetworkActivity extends BaseActivity<ActivityNetworkBinding, NetworkViewModel>
         implements NetworkNavigator, ConfirmDialogListener {
